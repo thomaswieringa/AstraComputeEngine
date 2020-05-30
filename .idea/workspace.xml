@@ -7,7 +7,11 @@
     <option name="HIGHLIGHT_NON_ACTIVE_CHANGELIST" value="false" />
     <option name="LAST_RESOLUTION" value="IGNORE" />
   </component>
+  <component name="Git.Settings">
+    <option name="RECENT_GIT_ROOT_PATH" value="$PROJECT_DIR$" />
+  </component>
   <component name="ProjectId" id="1cOWczHr10W2YbkOmkv7LxrCfeH" />
+  <component name="ProjectLevelVcsManager" settingsEditedManually="true" />
   <component name="ProjectViewState">
     <option name="hideEmptyMiddlePackages" value="true" />
     <option name="showLibraryContents" value="true" />
@@ -16,7 +20,7 @@
     <property name="RunOnceActivity.OpenProjectViewOnStart" value="true" />
     <property name="RunOnceActivity.ShowReadmeOnStart" value="true" />
     <property name="WebServerToolWindowFactoryState" value="false" />
-    <property name="last_opened_file_path" value="$PROJECT_DIR$" />
+    <property name="last_opened_file_path" value="$PROJECT_DIR$/../AstraComputeEngine" />
   </component>
   <component name="RecentsManager">
     <key name="CopyFile.RECENT_KEYS">
@@ -155,7 +159,7 @@
       <option name="presentableId" value="Default" />
       <updated>1590400204160</updated>
       <workItem from="1590400209688" duration="7355000" />
-      <workItem from="1590756415431" duration="2356000" />
+      <workItem from="1590756415431" duration="2551000" />
     </task>
     <servers />
   </component>
@@ -163,6 +167,14 @@
     <option name="version" value="2" />
   </component>
   <component name="WindowStateProjectService">
+    <state x="583" y="354" key="Github.ShareDialog" timestamp="1590831943838">
+      <screen x="0" y="0" width="1440" height="900" />
+    </state>
+    <state x="583" y="354" key="Github.ShareDialog/0.0.1440.900@0.0.1440.900" timestamp="1590831943838" />
+    <state x="446" y="162" key="Github.UntrackedFilesDialog" timestamp="1590831954201">
+      <screen x="0" y="0" width="1440" height="900" />
+    </state>
+    <state x="446" y="162" key="Github.UntrackedFilesDialog/0.0.1440.900@0.0.1440.900" timestamp="1590831954201" />
     <state width="1398" height="304" key="GridCell.Tab.0.bottom" timestamp="1590757443221">
       <screen x="0" y="0" width="1440" height="900" />
     </state>
