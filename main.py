@@ -18,6 +18,8 @@ from langdetect.lang_detect_exception import LangDetectException
 from nltk import PorterStemmer, word_tokenize
 from nltk.corpus import stopwords
 import nltk
+nltk.download('stopwords')
+nltk.download('punkt')
 
 
 def executeQuery(user, AcceptedUserCol, keyWords):
@@ -57,7 +59,7 @@ def executeQuery(user, AcceptedUserCol, keyWords):
                 # remove spaces
                 tweet = tweet.translate(str.maketrans('', '', string.punctuation))
 
-                stop_words = nltk.download('stopwords')
+                stop_words = set(stopwords.words('english'))
                 stemmer = PorterStemmer()
                 text2 = word_tokenize(tweet)
                 full_processed_tweet = [stemmer.stem(i) for i in text2 if not i in stop_words]
