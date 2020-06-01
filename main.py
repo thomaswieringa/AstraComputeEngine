@@ -56,7 +56,7 @@ def executeQuery(user, AcceptedUserCol, keyWords):
                 # remove spaces
                 tweet = tweet.translate(str.maketrans('', '', string.punctuation))
 
-                stop_words = set(stopwords.words('english'))
+                stop_words = nltk.download('stopwords')
                 stemmer = PorterStemmer()
                 text2 = word_tokenize(tweet)
                 full_processed_tweet = [stemmer.stem(i) for i in text2 if not i in stop_words]
@@ -82,6 +82,7 @@ def main():
         executeQuery(currentQuery["user"], acceptedUserCol, keyWords.find_one({})['keyWords'])
         print(currentQuery["user"])
         currentQuery = todoCol.find_one_and_delete({})
+
 
 if __name__ == '__main__':
     # This is used when running locally only. When deploying to Google App
