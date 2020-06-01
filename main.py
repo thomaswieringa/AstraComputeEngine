@@ -17,6 +17,7 @@ from contextlib import suppress
 from langdetect.lang_detect_exception import LangDetectException
 from nltk import PorterStemmer, word_tokenize
 from nltk.corpus import stopwords
+import nltk
 
 
 def executeQuery(user, AcceptedUserCol, keyWords):
