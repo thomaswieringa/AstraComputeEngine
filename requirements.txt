@@ -37,7 +37,6 @@ idna==2.8
 itsdangerous==0.24
 Jinja2==2.11.2
 joblib==0.14.0
-kiwisolver==1.2.0
 langdetect==1.0.8
 legacy==0.1.6
 lockfile==0.12.2
