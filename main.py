@@ -8,7 +8,7 @@ import datetime
 from pymongo import MongoClient
 import pymongo
 import string
-
+import Flask
 import twint
 import re
 from langdetect import detect, detect_langs
@@ -85,6 +85,7 @@ def main():
         executeQuery(currentQuery["user"], acceptedUserCol, keyWords.find_one({})['keyWords'])
         print(currentQuery["user"])
         currentQuery = todoCol.find_one_and_delete({})
+
 
 
 if __name__ == '__main__':
