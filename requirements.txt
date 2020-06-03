@@ -42,7 +42,6 @@ legacy==0.1.6
 lockfile==0.12.2
 lxml==4.5.0
 MarkupSafe==1.0
-matplotlib==3.2.1
 multidict==4.7.5
 nltk==3.5
 numpy==1.18.2
