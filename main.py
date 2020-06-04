@@ -1,7 +1,6 @@
 import requests
 import pandas as pd
 import twint
-from bs4 import BeautifulSoup
 import time
 import json
 import datetime
