@@ -7,8 +7,6 @@ import datetime
 from pymongo import MongoClient
 import pymongo
 import string
-import Flask
-import twint
 import re
 from langdetect import detect, detect_langs
 from contextlib import suppress
@@ -21,7 +19,7 @@ nltk.download('stopwords')
 nltk.download('punkt')
 
 
-def executeQuery(user, AcceptedUserCol, keyWords):
+def executequery(user, AcceptedUserCol, keyWords):
     c = twint.Config()
     c.Username = user
     c.Limit = 30
@@ -81,7 +79,7 @@ def main():
     currentQuery = todoCol.find_one_and_delete({})
     while currentQuery != None:
         print(currentQuery)
-        executeQuery(currentQuery["user"], acceptedUserCol, keyWords.find_one({})['keyWords'])
+        executequery(currentQuery["user"], acceptedUserCol, keyWords.find_one({})['keyWords'])
         print(currentQuery["user"])
         currentQuery = todoCol.find_one_and_delete({})
 
