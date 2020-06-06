@@ -82,7 +82,7 @@ def main():
         t0 = time.time()
         executequery(currentQuery["user"], acceptedUserCol, keyWords.find_one({})['keyWords'])
         t1 = time.time()
-        print("User {} took {}".format(currentQuery["user"]), t1-t0)
+        print("User {} took {}".format(currentQuery["user"], t1-t0))
         currentQuery = todoCol.find_one_and_delete({})
 
 
