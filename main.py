@@ -79,9 +79,9 @@ def main():
     keyWords = client['twitter']['keyWords']
     currentQuery = todoCol.find_one_and_delete({})
     while currentQuery != None:
-        t0 = datetime.now()
+        t0 = time.now()
         executequery(currentQuery["user"], acceptedUserCol, keyWords.find_one({})['keyWords'])
-        t1 =datetime.now()
+        t1 = time.now()
         print("User {} took {}".format(currentQuery["user"]), t1-t0)
         currentQuery = todoCol.find_one_and_delete({})
 
