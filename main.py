@@ -23,7 +23,7 @@ def executequery(user, AcceptedUserCol, keyWords):
     c = twint.Config()
     c.Username = user
     c.Limit = 30
-    c.Output = False
+    c.Hide_output = True
     c.Pandas = True
     # Run
     twint.run.Search(c)
