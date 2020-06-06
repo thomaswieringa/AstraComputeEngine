@@ -32,7 +32,7 @@ def executequery(user, AcceptedUserCol, keyWords):
 
     eng_count = 0
     key_count = 0
-
+    
     for index, row in Tweets_df.iterrows():
         tweet = row['tweet']
         # Make Lower case
