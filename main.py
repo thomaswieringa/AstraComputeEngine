@@ -23,6 +23,7 @@ def executequery(user, AcceptedUserCol, keyWords):
     c = twint.Config()
     c.Username = user
     c.Limit = 30
+    c.Output = False
     c.Pandas = True
     # Run
     twint.run.Search(c)
@@ -78,9 +79,10 @@ def main():
     keyWords = client['twitter']['keyWords']
     currentQuery = todoCol.find_one_and_delete({})
     while currentQuery != None:
-        print(currentQuery)
+        t0 = datetime.now()
         executequery(currentQuery["user"], acceptedUserCol, keyWords.find_one({})['keyWords'])
-        print(currentQuery["user"])
+        t1 =datetime.now()
+        print("User {} took {}".format(currentQuery["user"]), t1-t0)
         currentQuery = todoCol.find_one_and_delete({})
 
 
