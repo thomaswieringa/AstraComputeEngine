@@ -21,11 +21,10 @@ nltk.download('punkt')
 
 def executequery(user, AcceptedUserCol, keyWords):
     c = twint.Config()
-    c.Username = 'DeusDaan'
+    c.Username = user
     c.Limit = 30
     c.Hide_output = True
     c.Pandas = True
-    c.Since = '2019-01-01'
 
     # Run
     twint.run.Search(c)

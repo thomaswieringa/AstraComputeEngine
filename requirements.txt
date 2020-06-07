@@ -1,6 +1,6 @@
 requests==2.23.0
 pandas==1.0.4
-twint==2.1.17
+twint==2.1.20
 pymongo==3.10.1
 langdetect==1.0.8
 nltk==3.5
