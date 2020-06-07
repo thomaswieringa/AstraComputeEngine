@@ -24,7 +24,9 @@ def executequery(user, AcceptedUserCol, keyWords):
     c.Username = user
     c.Limit = 30
     c.Hide_output = True
-    c.Pandas = True
+    c.Pandas  = True
+    c.Since  = startDate.strftime('2019-01-01')
+
     # Run
     twint.run.Search(c)
 
