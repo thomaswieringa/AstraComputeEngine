@@ -21,47 +21,53 @@ nltk.download('punkt')
 
 def executequery(user, AcceptedUserCol, keyWords):
 
-    tweetCriteria = got.manager.TweetCriteria().setUsername(user) \
-        .setMaxTweets(30).setSince("2019-01-01")
-    tweets = got.manager.TweetManager.getTweets(tweetCriteria)
+        while True:
+            try:
+                tweetCriteria = got.manager.TweetCriteria().setUsername(user) \
+                    .setMaxTweets(30).setSince("2019-01-01")
+                tweets = got.manager.TweetManager.getTweets(tweetCriteria)
+                eng_count = 0
+                key_count = 0
 
-    eng_count = 0
-    key_count = 0
-    
-    for tweetobject in tweets:
-        tweet = tweetobject.text
-        # Make Lower case
-        tweet = tweet.lower()
-        # Remove links
-        tweet = re.sub(r'http\S+', '', tweet)
-        # remove non https links
-        tweet = re.sub("\\s*[^ /]+/[^ /]+", "", tweet)
+                for tweetobject in tweets:
+                    tweet = tweetobject.text
+                    # Make Lower case
+                    tweet = tweet.lower()
+                    # Remove links
+                    tweet = re.sub(r'http\S+', '', tweet)
+                    # remove non https links
+                    tweet = re.sub("\\s*[^ /]+/[^ /]+", "", tweet)
 
-        ##check if english
-        with suppress(LangDetectException):
-            lang = detect(tweet)
-            if lang == 'en':
-                eng_count += 1
+                    ##check if english
+                    with suppress(LangDetectException):
+                        lang = detect(tweet)
+                        if lang == 'en':
+                            eng_count += 1
 
-                ## Then check if contains key words
-                # Remove Numbers
-                tweet = re.sub(r'\d+', '', tweet)
-                # Remove special chars
-                tweet = re.sub(r"\W+|_", " ", tweet)
-                # remove spaces
-                tweet = tweet.translate(str.maketrans('', '', string.punctuation))
+                            ## Then check if contains key words
+                            # Remove Numbers
+                            tweet = re.sub(r'\d+', '', tweet)
+                            # Remove special chars
+                            tweet = re.sub(r"\W+|_", " ", tweet)
+                            # remove spaces
+                            tweet = tweet.translate(str.maketrans('', '', string.punctuation))
 
-                stop_words = set(stopwords.words('english'))
-                stemmer = PorterStemmer()
-                text2 = word_tokenize(tweet)
-                full_processed_tweet = [stemmer.stem(i) for i in text2 if not i in stop_words]
+                            stop_words = set(stopwords.words('english'))
+                            stemmer = PorterStemmer()
+                            text2 = word_tokenize(tweet)
+                            full_processed_tweet = [stemmer.stem(i) for i in text2 if not i in stop_words]
 
-                if (set(full_processed_tweet) & set(keyWords)):
-                    key_count += 1
+                            if (set(full_processed_tweet) & set(keyWords)):
+                                key_count += 1
+                if key_count > 0:
+                    query = {"user": user}
+                    AcceptedUserCol.insert(query)
+                break
+            except SomeSpecificException:
+                time.sleep(10)
+            break
 
-    if key_count > 0:
-        query = {"user": user}
-        AcceptedUserCol.insert(query)
+
 
 
 def main():
