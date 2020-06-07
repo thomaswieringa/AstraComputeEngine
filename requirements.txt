@@ -5,3 +5,4 @@ pymongo==3.10.1
 langdetect==1.0.8
 nltk==3.5
 dnspython==1.16.0
+GetOldTweets3 == 0.0.11

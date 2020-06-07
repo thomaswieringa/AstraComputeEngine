@@ -10,7 +10,7 @@ import string
 import re
 from langdetect import detect, detect_langs
 from contextlib import suppress
-
+import GetOldTweets3 as got
 from langdetect.lang_detect_exception import LangDetectException
 from nltk import PorterStemmer, word_tokenize
 from nltk.corpus import stopwords
@@ -20,23 +20,16 @@ nltk.download('punkt')
 
 
 def executequery(user, AcceptedUserCol, keyWords):
-    c = twint.Config()
-    c.Username = user
-    c.Limit = 30
-    c.Hide_output = True
-    c.Pandas = True
 
-    # Run
-    twint.run.Search(c)
-
-    # now you will have some tweets
-    Tweets_df = twint.storage.panda.Tweets_df
+    tweetCriteria = got.manager.TweetCriteria().setUsername(user) \
+        .setMaxTweets(30).setSince("2019-01-01")
+    tweets = got.manager.TweetManager.getTweets(tweetCriteria)
 
     eng_count = 0
     key_count = 0
     
-    for index, row in Tweets_df.iterrows():
-        tweet = row['tweet']
+    for tweetobject in tweets:
+        tweet = tweetobject.text
         # Make Lower case
         tweet = tweet.lower()
         # Remove links
