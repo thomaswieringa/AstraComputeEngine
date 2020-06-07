@@ -21,11 +21,11 @@ nltk.download('punkt')
 
 def executequery(user, AcceptedUserCol, keyWords):
     c = twint.Config()
-    c.Username = user
+    c.Username = 'DeusDaan'
     c.Limit = 30
     c.Hide_output = True
-    c.Pandas  = True
-    c.Since  = startDate.strftime('2019-01-01')
+    c.Pandas = True
+    c.Since = '2019-01-01'
 
     # Run
     twint.run.Search(c)
@@ -82,7 +82,7 @@ def main():
     currentQuery = todoCol.find_one_and_delete({})
     while currentQuery != None:
         t0 = time.time()
-        executequery(currentQuery["user"], acceptedUserCol, keyWords.find_one({})['keyWords'])
+        executequery(currentQuery['user'], acceptedUserCol, keyWords.find_one({})['keyWords'])
         t1 = time.time()
         print("User {} took {}".format(currentQuery["user"], t1-t0))
         currentQuery = todoCol.find_one_and_delete({})
