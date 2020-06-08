@@ -10,7 +10,7 @@ import string
 import re
 from langdetect import detect, detect_langs
 from contextlib import suppress
-import GetOldTweets3 as got
+
 from langdetect.lang_detect_exception import LangDetectException
 from nltk import PorterStemmer, word_tokenize
 from nltk.corpus import stopwords
@@ -20,54 +20,54 @@ nltk.download('punkt')
 
 
 def executequery(user, AcceptedUserCol, keyWords):
+    c = twint.Config()
+    c.Username = user
+    c.Limit = 30
+    c.Pandas = True
 
-        while True:
-            try:
-                tweetCriteria = got.manager.TweetCriteria().setUsername(user) \
-                    .setMaxTweets(30).setSince("2019-01-01")
-                tweets = got.manager.TweetManager.getTweets(tweetCriteria)
-                eng_count = 0
-                key_count = 0
+    # Run
+    twint.run.Search(c)
 
-                for tweetobject in tweets:
-                    tweet = tweetobject.text
-                    # Make Lower case
-                    tweet = tweet.lower()
-                    # Remove links
-                    tweet = re.sub(r'http\S+', '', tweet)
-                    # remove non https links
-                    tweet = re.sub("\\s*[^ /]+/[^ /]+", "", tweet)
+    # now you will have some tweets
+    Tweets_df = twint.storage.panda.Tweets_df
 
-                    ##check if english
-                    with suppress(LangDetectException):
-                        lang = detect(tweet)
-                        if lang == 'en':
-                            eng_count += 1
+    eng_count = 0
+    key_count = 0
 
-                            ## Then check if contains key words
-                            # Remove Numbers
-                            tweet = re.sub(r'\d+', '', tweet)
-                            # Remove special chars
-                            tweet = re.sub(r"\W+|_", " ", tweet)
-                            # remove spaces
-                            tweet = tweet.translate(str.maketrans('', '', string.punctuation))
+    for index, row in Tweets_df.iterrows():
+        tweet = row['tweet']
+        # Make Lower case
+        tweet = tweet.lower()
+        # Remove links
+        tweet = re.sub(r'http\S+', '', tweet)
+        # remove non https links
+        tweet = re.sub("\\s*[^ /]+/[^ /]+", "", tweet)
 
-                            stop_words = set(stopwords.words('english'))
-                            stemmer = PorterStemmer()
-                            text2 = word_tokenize(tweet)
-                            full_processed_tweet = [stemmer.stem(i) for i in text2 if not i in stop_words]
+        ##check if english
+        with suppress(LangDetectException):
+            lang = detect(tweet)
+            if lang == 'en':
+                eng_count += 1
 
-                            if (set(full_processed_tweet) & set(keyWords)):
-                                key_count += 1
-                if key_count > 0:
-                    query = {"user": user}
-                    AcceptedUserCol.insert(query)
-                break
-            except SomeSpecificException:
-                time.sleep(10)
-            break
+                ## Then check if contains key words
+                # Remove Numbers
+                tweet = re.sub(r'\d+', '', tweet)
+                # Remove special chars
+                tweet = re.sub(r"\W+|_", " ", tweet)
+                # remove spaces
+                tweet = tweet.translate(str.maketrans('', '', string.punctuation))
 
+                stop_words = set(stopwords.words('english'))
+                stemmer = PorterStemmer()
+                text2 = word_tokenize(tweet)
+                full_processed_tweet = [stemmer.stem(i) for i in text2 if not i in stop_words]
 
+                if (set(full_processed_tweet) & set(keyWords)):
+                    key_count += 1
+
+    if key_count > 0:
+        query = {"user": user}
+        AcceptedUserCol.insert(query)
 
 
 def main():
