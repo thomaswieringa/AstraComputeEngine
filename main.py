@@ -65,7 +65,7 @@ def executequery(user, AcceptedUserCol, keyWords):
                 if (set(full_processed_tweet) & set(keyWords)):
                     key_count += 1
 
-    if key_count > 0:
+    if key_count > 2:
         query = {"user": user}
         AcceptedUserCol.insert(query)
 
