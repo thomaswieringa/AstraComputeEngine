@@ -74,7 +74,7 @@ def main():
     client = MongoClient(
         "mongodb+srv://thomas:thomas123@cluster0-0kckv.mongodb.net/test?retryWrites=true&w=majority")
 
-    acceptedUserCol = client['twitter']['accepteduser']
+    acceptedUserCol = client['twitter']['accepteduserV2']
     todoCol = client['twitter']['usersToDo']
     keyWords = client['twitter']['keyWords']
     currentQuery = todoCol.find_one_and_delete({})
