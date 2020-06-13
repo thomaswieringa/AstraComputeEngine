@@ -65,7 +65,7 @@ def executequery(user, AcceptedUserCol, keyWords):
                 if (set(full_processed_tweet) & set(keyWords)):
                     key_count += 1
 
-    if key_count > 2:
+    if key_count > 4:
         query = {"user": user}
         AcceptedUserCol.insert(query)
 
@@ -74,7 +74,7 @@ def main():
     client = MongoClient(
         "mongodb+srv://thomas:thomas123@cluster0-0kckv.mongodb.net/test?retryWrites=true&w=majority")
 
-    acceptedUserCol = client['twitter']['accepteduserV2']
+    acceptedUserCol = client['twitter']['accepteduserV3']
     todoCol = client['twitter']['usersToDo']
     keyWords = client['twitter']['keyWords']
     currentQuery = todoCol.find_one_and_delete({})
