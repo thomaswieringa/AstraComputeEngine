@@ -66,7 +66,7 @@ def executequery(user, AcceptedUserCol, keyWords):
                 if (set(full_processed_tweet) & set(keyWords)):
                     key_count += 1
 
-    if key_count > 19 and eng_count > 24:
+    if key_count > 19 and eng_count > 22:
         query = {"user": user}
         print('User: {} is added'.format(user))
         AcceptedUserCol.insert(query)
