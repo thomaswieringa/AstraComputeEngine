@@ -65,8 +65,9 @@ def executequery(user, AcceptedUserCol, keyWords):
                 if (set(full_processed_tweet) & set(keyWords)):
                     key_count += 1
 
-    if key_count > 9:
+    if key_count > 19 and eng_count > 24:
         query = {"user": user}
+        print('User: {} is added'.format(user))
         AcceptedUserCol.insert(query)
 
 
@@ -74,8 +75,8 @@ def main():
     client = MongoClient(
         "mongodb+srv://thomas:thomas123@cluster0-0kckv.mongodb.net/test?retryWrites=true&w=majority")
 
-    acceptedUserCol = client['twitter']['accepteduserV3']
-    todoCol = client['twitter']['usersToDo']
+    acceptedUserCol = client['twitter']['finalaccepteduser']
+    todoCol = client['twitter']['accepteduserV3']
     keyWords = client['twitter']['keyWords']
     currentQuery = todoCol.find_one_and_delete({})
     while currentQuery != None:
