@@ -23,6 +23,7 @@ def executequery(user, AcceptedUserCol, keyWords):
     c = twint.Config()
     c.Username = user
     c.Limit = 30
+    c.Since = "2019-01-01 00:00:00"
     c.Pandas = True
 
     # Run
