@@ -77,7 +77,7 @@ def main():
         "mongodb+srv://thomas:thomas123@cluster0-0kckv.mongodb.net/test?retryWrites=true&w=majority")
 
     acceptedUserCol = client['twitter']['finalaccepteduser']
-    todoCol = client['twitter']['accepteduserV3']
+    todoCol = client['twitter']['accepteduserV2']
     keyWords = client['twitter']['keyWords']
     currentQuery = todoCol.find_one_and_delete({})
     while currentQuery != None:
